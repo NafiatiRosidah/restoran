@@ -1,0 +1,416 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restoranku</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Datatable -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+
+    <!-- select2 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css">
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Restoranku</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse show" id="navbarNav" style="">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="../dashboard">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Transaction
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="../receipt">Receipt</a></li>
+                            <li><a class="dropdown-item" href="../report">Report</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link   dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Master Data
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="../user">Users</a></li>
+                            <li><a class="dropdown-item" href="../category">Categories</a></li>
+                            <li><a class="dropdown-item" href="../menu">Menus</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="../auth/logout-process.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container mt-4">
+<h1 class="mb-5">Update Receipt</h1>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Data berhasil dieksekusi</strong>
+</div>
+
+<form method="post" action="receipt-post-process.php">
+    <div class="row">
+        <input type="hidden" name="id" value="27967">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="customer_name" class="form-label">Nama</label>
+                <input type="text" class="form-control" name="customer_name" value="Novirsd" required="">
+            </div>
+            <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select name="status" class="form-control">
+                    <option value="Entry" selected="">Entry
+                    </option>
+                                    </select>
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+            <a href="index.php" class="btn btn-secondary">Cancel</a>
+        </div>
+    </div>
+</form>
+
+<hr>
+<h2>Details</h2>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#detailFormModal">
+    Add
+</button>
+
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Note</th>
+                <th scope="col">Price</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Subtotal</th>
+                <th scope="col" width="10%">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+                        <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td class="text-end"><b>0</b></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal -->
+<div class="modal modal-lg fade" id="detailFormModal" aria-labelledby="detailFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="detailFormModalLabel">Detail Modal</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="overflow:hidden;">
+                <form method="post" action="detail-receipt-post-process.php">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input type="hidden" name="modal_receipt_id" value="27967">
+                            <input type="hidden" name="modal_id">
+
+                            <div class="mb-3">
+                                <label for="customer_name" class="form-label">Menu</label>
+                                <select class="form-select select2-hidden-accessible" name="modal_menu_id" id="select2-modal" data-placeholder="Choose one" data-select2-id="select2-data-select2-modal" tabindex="-1" aria-hidden="true">
+                                    
+                                    </span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="note" class="form-label">Note</label>
+                                <input type="text" class="form-control" name="modal_note">
+                            </div>
+                            <button type=" submit" name="submit" class="btn btn-primary">Save</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class=" mb-3">
+                                <label for="amount" class="form-label">Amount</label>
+                                <input type="number" class="form-control" name="modal_amount" required="">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+<!-- jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- bootstrap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
+<!-- datatable -->
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+<!-- select2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#data').DataTable();
+
+    $('#select2-modal').select2({
+        theme: 'bootstrap-5',
+        dropdownParent: $("#detailFormModal")
+    });
+});
+</script>
+
+<script>
+function editModalShow(id, menuId, note, amount) {
+    document.getElementsByName('modal_id')[0].value = id;
+    document.getElementsByName('modal_menu_id')[0].value = menuId;
+    document.getElementsByName('modal_note')[0].value = note;
+    document.getElementsByName('modal_amount')[0].value = amount;
+    $("#select2-modal").val(menuId).trigger("change");
+}
+</script>
+
+
+<deepl-input-controller></deepl-input-controller></body></html>
+
+
+
+<table id="data" class="table table-striped table-bordered dataTable no-footer" style="width:100%" role="grid" aria-describedby="data_info">
+
+    <thead>
+        <tr role="row"><th scope="col" class="sorting_asc" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-sort="ascending" aria-label="#: activate to sort column descending" style="width: 9.48438px;">#</th><th scope="col" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 59.4688px;">Date</th><th scope="col" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 44.5625px;">Name</th><th scope="col" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 91.9062px;">Price</th><th scope="col" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 46.3594px;">Status</th><th scope="col" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 33.6406px;">User</th><th scope="col" width="10%" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 85.3906px;">Action</th></tr>
+    </thead>
+    <tbody>
+
+    <tr role="row" class="odd">
+            <td scope="row" class="sorting_1">1</td>
+            <td scope="row">25/04/2024 14:56:09</td>
+            <td scope="row">Jul</td>
+            <td scope="row" class="text-end">252.000.070.000</td>
+            <td scope="row">Entry</td>
+            <td scope="row">joko</td>
+            <td scope="row">
+                <div class="d-flex justify-content-center">
+                    <a type="button" href="form.php?id=27957" class="btn btn-warning btn-sm me-2">Edit</a>
+                    <form action="delete-process.php" method="post">
+                        <input type="hidden" name="id" value="27957">
+                        <button type="submit" name="submit" onclick="return confirm('Anda yakin menghapus data ini?');" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr><tr role="row" class="even">
+            <td scope="row" class="sorting_1">2</td>
+            <td scope="row">25/04/2024 17:59:40</td>
+            <td scope="row">P</td>
+            <td scope="row" class="text-end">100.000</td>
+            <td scope="row">Entry</td>
+            <td scope="row">joko</td>
+            <td scope="row">
+                <div class="d-flex justify-content-center">
+                    <a type="button" href="form.php?id=27958" class="btn btn-warning btn-sm me-2">Edit</a>
+                    <form action="delete-process.php" method="post">
+                        <input type="hidden" name="id" value="27958">
+                        <button type="submit" name="submit" onclick="return confirm('Anda yakin menghapus data ini?');" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr><tr role="row" class="odd">
+            <td scope="row" class="sorting_1">3</td>
+            <td scope="row">26/04/2024 19:09:20</td>
+            <td scope="row">p</td>
+            <td scope="row" class="text-end">0</td>
+            <td scope="row">Entry</td>
+            <td scope="row">joko</td>
+            <td scope="row">
+                <div class="d-flex justify-content-center">
+                    <a type="button" href="form.php?id=27961" class="btn btn-warning btn-sm me-2">Edit</a>
+                    <form action="delete-process.php" method="post">
+                        <input type="hidden" name="id" value="27961">
+                        <button type="submit" name="submit" onclick="return confirm('Anda yakin menghapus data ini?');" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr><tr role="row" class="even">
+            <td scope="row" class="sorting_1">4</td>
+            <td scope="row">26/04/2024 21:52:09</td>
+            <td scope="row">Novirsd</td>
+            <td scope="row" class="text-end">0</td>
+            <td scope="row">Entry</td>
+            <td scope="row">joko</td>
+            <td scope="row">
+                <div class="d-flex justify-content-center">
+                    <a type="button" href="form.php?id=27962" class="btn btn-warning btn-sm me-2">Edit</a>
+                    <form action="delete-process.php" method="post">
+                        <input type="hidden" name="id" value="27962">
+                        <button type="submit" name="submit" onclick="return confirm('Anda yakin menghapus data ini?');" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr><tr role="row" class="odd">
+            <td scope="row" class="sorting_1">5</td>
+            <td scope="row">26/04/2024 22:01:25</td>
+            <td scope="row">Novirsd</td>
+            <td scope="row" class="text-end">0</td>
+            <td scope="row">Entry</td>
+            <td scope="row">joko</td>
+            <td scope="row">
+                <div class="d-flex justify-content-center">
+                    <a type="button" href="form.php?id=27963" class="btn btn-warning btn-sm me-2">Edit</a>
+                    <form action="delete-process.php" method="post">
+                        <input type="hidden" name="id" value="27963">
+                        <button type="submit" name="submit" onclick="return confirm('Anda yakin menghapus data ini?');" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </td>
+        </tr></tbody>
+</table>
+
+<div class="container mt-4">
+    <h1 class="mb-5">Add Receipt</h1>
+    
+    <form method="post" action="receipt-post-process.php">
+        <div class="row">
+            <input type="hidden" name="id" value="0">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="customer_name" class="form-label">Nama</label>
+                    <input type="text" class="form-control" name="customer_name" value="" required="">
+                </div>
+                <div class="mb-3">
+                    <label for="status" class="form-label">Status</label>
+                    <select name="status" class="form-control">
+                        <option value="Entry">Entry
+                        </option>
+                                        </select>
+                </div>
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                <a href="index.php" class="btn btn-secondary">Cancel</a>
+            </div>
+        </div>
+    </form>
+    
+    
+    
+    </div>
+
+
+    <div class="table-responsive">
+        <div id="data_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="data_length"><label>Show <select name="data_length" aria-controls="data" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="data_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="data"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="data" class="table table-striped table-bordered dataTable no-footer" style="width:100%" role="grid" aria-describedby="data_info">
+    
+            <thead>
+                <tr role="row"><th scope="col" class="sorting_asc" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-sort="ascending" aria-label="#: activate to sort column descending" style="width: 9.48438px;">#</th><th scope="col" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="Date: activate to sort column ascending" style="width: 59.4688px;">Date</th><th scope="col" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 44.5625px;">Name</th><th scope="col" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending" style="width: 37.1406px;">Price</th><th scope="col" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 46.3594px;">Status</th><th scope="col" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="User: activate to sort column ascending" style="width: 33.6406px;">User</th><th scope="col" width="10%" class="sorting" tabindex="0" aria-controls="data" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 85.3906px;">Action</th></tr>
+            </thead>
+            <tbody>
+                
+            <tr role="row" class="odd">
+                    <td scope="row" class="sorting_1">1</td>
+                    <td scope="row">25/04/2024 14:56:09</td>
+                    <td scope="row">Jul</td>
+                    <td scope="row" class="text-end">280.000</td>
+                    <td scope="row">Entry</td>
+                    <td scope="row">joko</td>
+                    <td scope="row">
+                        <div class="d-flex justify-content-center">
+                            <a type="button" href="form.php?id=27957" class="btn btn-warning btn-sm me-2">Edit</a>
+                            <form action="delete-process.php" method="post">
+                                <input type="hidden" name="id" value="27957">
+                                <button type="submit" name="submit" onclick="return confirm('Anda yakin menghapus data ini?');" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr><tr role="row" class="even">
+                    <td scope="row" class="sorting_1">2</td>
+                    <td scope="row">25/04/2024 17:59:40</td>
+                    <td scope="row">P</td>
+                    <td scope="row" class="text-end">100.000</td>
+                    <td scope="row">Entry</td>
+                    <td scope="row">joko</td>
+                    <td scope="row">
+                        <div class="d-flex justify-content-center">
+                            <a type="button" href="form.php?id=27958" class="btn btn-warning btn-sm me-2">Edit</a>
+                            <form action="delete-process.php" method="post">
+                                <input type="hidden" name="id" value="27958">
+                                <button type="submit" name="submit" onclick="return confirm('Anda yakin menghapus data ini?');" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr><tr role="row" class="odd">
+                    <td scope="row" class="sorting_1">3</td>
+                    <td scope="row">26/04/2024 19:09:20</td>
+                    <td scope="row">p</td>
+                    <td scope="row" class="text-end">0</td>
+                    <td scope="row">Entry</td>
+                    <td scope="row">joko</td>
+                    <td scope="row">
+                        <div class="d-flex justify-content-center">
+                            <a type="button" href="form.php?id=27961" class="btn btn-warning btn-sm me-2">Edit</a>
+                            <form action="delete-process.php" method="post">
+                                <input type="hidden" name="id" value="27961">
+                                <button type="submit" name="submit" onclick="return confirm('Anda yakin menghapus data ini?');" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr><tr role="row" class="even">
+                    <td scope="row" class="sorting_1">4</td>
+                    <td scope="row">26/04/2024 21:52:09</td>
+                    <td scope="row">Novirsd</td>
+                    <td scope="row" class="text-end">0</td>
+                    <td scope="row">Entry</td>
+                    <td scope="row">joko</td>
+                    <td scope="row">
+                        <div class="d-flex justify-content-center">
+                            <a type="button" href="form.php?id=27962" class="btn btn-warning btn-sm me-2">Edit</a>
+                            <form action="delete-process.php" method="post">
+                                <input type="hidden" name="id" value="27962">
+                                <button type="submit" name="submit" onclick="return confirm('Anda yakin menghapus data ini?');" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr><tr role="row" class="odd">
+                    <td scope="row" class="sorting_1">5</td>
+                    <td scope="row">26/04/2024 22:01:25</td>
+                    <td scope="row">Novirsd</td>
+                    <td scope="row" class="text-end">0</td>
+                    <td scope="row">Entry</td>
+                    <td scope="row">joko</td>
+                    <td scope="row">
+                        <div class="d-flex justify-content-center">
+                            <a type="button" href="form.php?id=27963" class="btn btn-warning btn-sm me-2">Edit</a>
+                            <form action="delete-process.php" method="post">
+                                <input type="hidden" name="id" value="27963">
+                                <button type="submit" name="submit" onclick="return confirm('Anda yakin menghapus data ini?');" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr></tbody>
+        </table></div></div><div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="data_info" role="status" aria-live="polite">Showing 1 to 5 of 5 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="data_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="data_previous"><a href="#" aria-controls="data" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="data" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="data_next"><a href="#" aria-controls="data" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>
+    </div>
+
+    
